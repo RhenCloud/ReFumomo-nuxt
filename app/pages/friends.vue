@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { getPageConfig } from "../config";
-import { ref, onMounted, onUnmounted } from "vue";
 
 // 页面配置
 const pageConfig = getPageConfig("friends");
@@ -93,14 +92,12 @@ onMounted(() => {
 // 监听路由变化，切换页码时滚动到顶部
 watch(
     () => route.query.page,
-    (newPage, oldPage) => {
-        if (newPage !== oldPage) {
-            // 平滑滚动到页面顶部
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-        }
+    () => {
+        // 平滑滚动到页面顶部
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     }
 );
 
@@ -114,12 +111,6 @@ interface Friend {
 
 // 网站数据
 const friends: Friend[] = [
-    // {
-    //     title: "个人主页",
-    //     description: "这是我的个人主页，也就是本站",
-    //     avatar: "https://q4.qlogo.cn/g?b=qq&nk=236668094&s=640",
-    //     url: "https://rhen.cloud",
-    // },
     {
         title: "wuxian",
         description: "wuxian's web",
@@ -239,11 +230,7 @@ function resetForm() {
             </section>
 
             <!-- 申请友链表单弹窗 -->
-            <section
-                ref="applyFormRef"
-                class="bg-white rounded-2xl shadow-lg p-6 max-w-4xl w-full mb-12 component-card flex justify-center items-center"
-                style="box-shadow: 0 4px 24px rgba(139, 90, 140, 0.08)"
-            >
+            <Teleport to="body">
                 <div v-if="showApplyForm" class="modal-overlay" @click="showApplyForm = false">
                     <div class="modal-content apply-form" @click.stop>
                         <h2>申请友链</h2>
@@ -289,7 +276,7 @@ function resetForm() {
                                     id="email"
                                     v-model="friendRequest.email"
                                     class="styled-input"
-                                    placeholder=""
+                                    placeholder="example@example.com"
                                     required
                                 />
                             </div>
@@ -314,7 +301,7 @@ function resetForm() {
                         </form>
                     </div>
                 </div>
-            </section>
+            </Teleport>
 
             <!-- 分页导航 -->
             <section
