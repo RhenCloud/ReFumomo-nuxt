@@ -20,8 +20,8 @@ fork 自[Hakutyan-bai/Fumomo-nuxt](https://github.com/Hakutyan-bai/Fumomo-nuxt)
 
 ## TODO
 
-- [] 统一配置管理
-- [] 深色模式
+- [ ] 统一配置管理
+- [ ] 深色模式
 
 ## 配置文档
 
