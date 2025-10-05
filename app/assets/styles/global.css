@@ -1,0 +1,794 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   字体定义
+   ========================= */
+
+@font-face {
+    font-family: "XiaokeNailao";
+    src: url("/fonts/XiaokeNailao/xknl.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================
+   全局字体设置
+   ========================= */
+
+* {
+    font-family: "Comic Sans MS", "Comic Sans", "XiaokeNailao", "Comic Neue", "Chalkduster", "Bradley Hand",
+        "Brush Script MT", "Lucida Handwriting", "Marker Felt", "Snell Roundhand", "Apple Chancery", "Zapf Chancery",
+        cursive, fantasy, sans-serif;
+}
+
+/* =========================
+   全局样式统一管理
+   ========================= */
+
+/* 自定义滚动条样式 - Webkit内核浏览器 */
+::-webkit-scrollbar {
+    width: 8px;
+    cursor: none !important;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(139, 90, 140, 0.05);
+    border-radius: 4px;
+    cursor: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(139, 90, 140, 0.3);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    cursor: none !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 90, 140, 0.5);
+    cursor: none !important;
+}
+
+/* Firefox滚动条样式 */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 90, 140, 0.3) rgba(139, 90, 140, 0.05);
+}
+
+/* =========================
+   动画关键帧定义
+   ========================= */
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(-50px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-10px);
+    }
+    70% {
+        transform: scale(0.9) translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sway {
+    0%,
+    100% {
+        transform: rotate(-5deg) translateX(-10px);
+    }
+    50% {
+        transform: rotate(5deg) translateX(10px);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.1);
+    }
+}
+
+@keyframes breathing {
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* =========================
+   首页样式
+   ========================= */
+
+/* Logo样式 */
+.logo,
+.font-fumofumo,
+nav a[href="/"],
+.font-bold,
+.font-semibold,
+.font-medium,
+.font-normal,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+time {
+    font-family: "Comic Sans MS", "Comic Sans", "XiaokeNailao", "Comic Neue", "Chalkduster", "Bradley Hand",
+        "Brush Script MT", "Lucida Handwriting", "Marker Felt", "Snell Roundhand", "Apple Chancery", "Zapf Chancery",
+        cursive, fantasy, sans-serif !important;
+}
+
+.logo,
+.font-fumofumo,
+nav a[href="/"] {
+    color: #8b5a8c !important;
+}
+
+/* 动画触发类 */
+.logo.bounce-in {
+    animation: bounceIn 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.subtitle.fade-in {
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.content.fade-in-delayed {
+    animation: fadeInUp 0.8s ease-out 1s forwards;
+}
+
+.qualification.fade-in-delayed {
+    animation: fadeInUp 0.8s ease-out 1s forwards;
+}
+
+/* 卡片hover效果 */
+.content > div:hover {
+    box-shadow: 0 15px 40px rgba(139, 90, 140, 0.25);
+}
+
+/* =========================
+   导航栏样式
+   ========================= */
+
+/* hover效果 */
+.nav-link:hover {
+    background-color: rgba(139, 90, 140, 0.1);
+}
+
+/* 移动端导航菜单基础样式 */
+.mobile-menu {
+    position: fixed !important;
+    top: 5rem !important;
+    right: 1rem !important;
+    width: 200px !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(139, 90, 140, 0.2) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+    z-index: 9999 !important;
+    display: none !important;
+    flex-direction: column !important;
+    padding: 1rem 0 !important;
+    transform: translateY(-10px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+@media (max-width: 767px) {
+    .mobile-menu.active {
+        display: flex !important;
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    .mobile-menu {
+        display: none !important;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+.mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu li {
+    width: 100%;
+    list-style: none;
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    text-align: left;
+    transition: all 0.3s ease;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 6px;
+    margin: 0 0.5rem;
+}
+
+.mobile-menu a:hover {
+    background-color: rgba(139, 90, 140, 0.1);
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
+/* 在桌面端隐藏移动端菜单 */
+@media (min-width: 768px) {
+    .mobile-menu {
+        display: none;
+    }
+
+    /* 桌面端隐藏汉堡菜单按钮 */
+    #nav-toggle {
+        display: none !important;
+    }
+}
+
+/* 移动端显示汉堡菜单按钮 */
+@media (max-width: 767px) {
+    #nav-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 10001 !important;
+    }
+}
+
+/* 强制移动端汉堡菜单按钮显示 */
+@media (max-width: 768px) {
+    button#nav-toggle {
+        display: flex !important;
+    }
+}
+
+/* =========================
+   加载动画样式
+   ========================= */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffeef8 0%, #f0f9ff 50%, #fdf4ff 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+.loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.fluffy-ball {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    animation: sway 2s ease-in-out infinite;
+}
+
+.ball-core {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.fluff {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: float 3s ease-in-out infinite;
+}
+
+.fluff-1 {
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 20px;
+    animation-delay: 0s;
+}
+.fluff-2 {
+    width: 15px;
+    height: 15px;
+    top: 15px;
+    right: 0;
+    animation-delay: 0.5s;
+}
+.fluff-3 {
+    width: 18px;
+    height: 18px;
+    bottom: 0;
+    left: 15px;
+    animation-delay: 1s;
+}
+.fluff-4 {
+    width: 12px;
+    height: 12px;
+    bottom: 10px;
+    right: 5px;
+    animation-delay: 1.5s;
+}
+.fluff-5 {
+    width: 16px;
+    height: 16px;
+    top: 5px;
+    left: 0;
+    animation-delay: 2s;
+}
+.fluff-6 {
+    width: 14px;
+    height: 14px;
+    top: 25px;
+    right: 10px;
+    animation-delay: 2.5s;
+}
+
+.loading-text {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #8b5a8c;
+    font-family: "Comic Sans MS", "Comic Sans", "XiaokeNailao", "Comic Neue", "Chalkduster", "Bradley Hand",
+        "Brush Script MT", "Lucida Handwriting", "Marker Felt", "Snell Roundhand", "Apple Chancery", "Zapf Chancery",
+        cursive, fantasy, sans-serif;
+    animation: breathing 2s ease-in-out infinite;
+}
+
+/* =========================
+   Welcome组件样式
+   ========================= */
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(100px);
+}
+
+#container {
+    font-family: "Comic Sans MS", "Comic Sans", "XiaokeNailao", "Comic Neue", "Chalkduster", "Bradley Hand",
+        "Brush Script MT", "Lucida Handwriting", "Marker Felt", "Snell Roundhand", "Apple Chancery", "Zapf Chancery",
+        cursive, fantasy, sans-serif;
+    height: 100%;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#hero {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+}
+
+#hero h1 {
+    font-size: 22px;
+    margin-top: 0.25em;
+}
+
+#links {
+    display: flex;
+    gap: 16px;
+}
+
+#links a {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    color: #111827;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+#links a:hover {
+    color: rgb(78, 80, 86);
+}
+
+#links a svg {
+    height: 1em;
+    margin-left: 8px;
+}
+
+#links a.button {
+    color: white;
+    background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), inset 0 -2px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+}
+
+#links a.button:hover {
+    color: rgb(230, 230, 230);
+    box-shadow: none;
+}
+
+#hero pre {
+    font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    font-weight: normal;
+    background: linear-gradient(14deg, #d83333 0%, #f041ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+#hero h2 {
+    margin: 0 0 1em;
+    font-weight: normal;
+    color: #111827;
+    font-size: 20px;
+}
+
+#hero p {
+    color: #4b5563;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.006em;
+    margin: 0;
+}
+
+#hero code {
+    display: inline-block;
+    background: linear-gradient(66.77deg, #f3cddd 0%, #f5cee7 100%) padding-box,
+        linear-gradient(155deg, #d83333 0%, #f041ff 18%, #f5cee7 45%) border-box;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 6px 8px;
+}
+
+.box {
+    padding: 16px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 16px;
+    border: 1px solid white;
+}
+
+#news {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    max-width: 300px;
+    text-decoration: none;
+    transition: background 0.2s;
+    backdrop-filter: blur(50px);
+}
+
+#news:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================
+   文章页面特殊样式
+   ========================= */
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    overflow: hidden;
+}
+
+/* =========================
+   响应式设计
+   ========================= */
+
+/* 导航栏移动端样式 */
+@media (max-width: 767px) {
+    /* 汉堡菜单按钮样式 */
+    #nav-toggle {
+        display: flex !important;
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        margin: 0;
+        z-index: 10000;
+        position: relative;
+    }
+
+    #nav-toggle span {
+        width: 1.5rem;
+        height: 2px;
+        background-color: #8b5a8c !important;
+        margin: 2px 0;
+        border-radius: 1px;
+        transition: all 0.3s ease;
+        display: block;
+    }
+
+    /* 汉堡菜单动画 */
+    #nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    #nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    #nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Footer响应式 */
+    footer {
+        padding: 1.5rem 0;
+    }
+
+    footer p {
+        font-size: 1rem;
+    }
+
+    /* 首页响应式 */
+    .logo {
+        font-size: 2.25rem;
+    }
+
+    .subtitle {
+        font-size: 1.25rem;
+    }
+
+    main .max-w-screen-xl {
+        padding: 1rem;
+        padding-top: 6rem;
+    }
+
+    .content {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+
+    .content > div {
+        padding: 1.5rem;
+    }
+
+    /* Welcome组件响应式 */
+    #container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #hero {
+        display: block;
+        padding-top: 10%;
+    }
+
+    #links {
+        flex-wrap: wrap;
+    }
+
+    #links a.button {
+        padding: 14px 18px;
+    }
+
+    #news {
+        right: 16px;
+        left: 16px;
+        bottom: 2.5rem;
+        max-width: 100%;
+    }
+
+    #hero h1 {
+        line-height: 1.5;
+    }
+
+    /* 项目页响应式 */
+    .projects-page main section {
+        padding: 2rem 1.5rem;
+        max-width: 95vw;
+    }
+
+    .projects-page main h1 {
+        font-size: 2rem;
+    }
+
+    .projects-page main .text-xl {
+        font-size: 1rem;
+    }
+
+    .projects-page .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* 网站页响应式 */
+    .website-page main section {
+        padding: 2rem 1.5rem;
+        max-width: 95vw;
+    }
+
+    .website-page main h1 {
+        font-size: 2rem;
+    }
+
+    .website-page main .text-xl {
+        font-size: 1rem;
+    }
+
+    .website-page .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .website-page .grid > div {
+        padding: 1.25rem;
+    }
+
+    .website-page .grid h3 {
+        font-size: 1.125rem;
+    }
+
+    /* Q&A页响应式 */
+    .qa-page main section {
+        padding: 2rem 1.5rem;
+        max-width: 95vw;
+    }
+
+    .qa-page main h1 {
+        font-size: 2rem;
+    }
+
+    .qa-page main .text-xl {
+        font-size: 1rem;
+    }
+
+    .qa-page .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .qa-page .grid > div {
+        padding: 1.25rem;
+    }
+
+    .qa-page .grid h3 {
+        font-size: 1.125rem;
+    }
+
+    /* 文章页响应式 */
+    .articles-page main section {
+        padding: 2rem 1.5rem;
+        max-width: 95vw;
+    }
+
+    .articles-page main h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .articles-page main .text-xl {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .articles-page .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .articles-page article h3 {
+        font-size: 1.125rem;
+    }
+
+    .articles-page article p {
+        font-size: 0.875rem;
+        margin-bottom: 2rem;
+    }
+
+    .articles-page article a {
+        padding: 1.25rem;
+    }
+
+    .articles-page article time {
+        bottom: 1.75rem;
+        right: 1.25rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* 小屏幕特殊响应式 */
+@media (max-width: 600px) {
+    .about-page main section {
+        padding: 1.25rem 0.5rem 1.25rem 0.5rem;
+        max-width: 100vw;
+    }
+
+    .about-page main h1 {
+        font-size: 1.25rem;
+    }
+
+    .about-page main .w-24 {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 2rem;
+    }
+}
+
+/* 中等屏幕响应式 */
+@media (max-width: 900px) {
+    .articles-page main section {
+        max-width: 90vw;
+        padding: 2rem 1.5rem;
+    }
+
+    .articles-page .grid {
+        gap: 1.25rem;
+    }
+}
+
+/* Welcome组件超小屏幕 */
+@media screen and (max-height: 368px) {
+    #news {
+        display: none;
+    }
+}

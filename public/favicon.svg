@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>fumofumo extra fuzzy favicon</title>
+  <desc>温暖色系毛茸茸小绒团，去掉表情，更加蓬松。</desc>
+
+  <defs>
+    <!-- 暖色渐变 -->
+    <radialGradient id="warmGrad" cx="0.4" cy="0.3" r="0.9">
+      <stop offset="0%"  stop-color="#FFE7C6"/>
+      <stop offset="40%" stop-color="#FFBC8C"/>
+      <stop offset="100%" stop-color="#FF8C6A"/>
+    </radialGradient>
+
+    <!-- 外发光 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- 强化毛边效果 -->
+    <filter id="fuzzy" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="4" seed="5" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- 高光 -->
+    <radialGradient id="highlight" cx="0.3" cy="0.25" r="0.35">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 背景光晕 -->
+  <g filter="url(#glow)">
+    <circle cx="128" cy="128" r="86" fill="url(#warmGrad)"/>
+  </g>
+
+  <!-- 毛茸茸边缘 -->
+  <g filter="url(#fuzzy)">
+    <circle cx="128" cy="128" r="86" fill="url(#warmGrad)"/>
+  </g>
+
+  <!-- 主体圆团 -->
+  <circle cx="128" cy="128" r="76" fill="url(#warmGrad)"/>
+
+  <!-- 高光 -->
+  <ellipse cx="108" cy="102" rx="34" ry="26" fill="url(#highlight)"/>
+
+  <!-- 底部柔和阴影 -->
+  <ellipse cx="138" cy="160" rx="40" ry="20" fill="#000" opacity="0.08"/>
+</svg>
