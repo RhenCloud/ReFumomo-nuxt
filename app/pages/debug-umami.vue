@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { siteConfig } from '../config'
 import { useUmamiStats } from '../composables/useUmamiStats'
-
+// 我没删除，你们也可以拿来调试umami
 // 直接调用以查看返回值
 const stats = await useUmamiStats()
 

@@ -88,7 +88,7 @@ export default defineEventHandler(async (event): Promise<RSSResponse> => {
     return {
       items: [],
       total: 0,
-      error: `RSS 获取失败: ${error instanceof Error ? error.message : '未知错误'}`
+      error: `RSS 获取失败，dev环境无法获取RSS: ${error instanceof Error ? error.message : '未知错误'}`
     }
   }
 })

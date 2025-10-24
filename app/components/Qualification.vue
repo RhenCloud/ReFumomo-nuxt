@@ -195,6 +195,21 @@ const awards: Award[] = [
       </div>
     </div>
 
+    <!-- 技能专长 -->
+    <div v-if="siteConfig.qualificationSections.skills" class="mb-8">
+      <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+        <i class="fas fa-code mr-2"></i>
+        技能专长
+      </h3>
+      <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        <div v-for="icon in techIcons" :key="icon.name"
+             class="flex flex-col items-center justify-center bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors group">
+          <component :is="icon.component" class="w-12 h-12 mb-2" />
+          <span class="text-xs text-gray-600 text-center">{{ icon.name }}</span>
+        </div>
+      </div>
+    </div>
+
     <!-- 教育背景 -->
     <div v-if="siteConfig.qualificationSections.education" class="mb-8">
       <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
@@ -214,20 +229,7 @@ const awards: Award[] = [
         </div>
       </div>
 
-    <!-- 技能专长 -->
-    <div v-if="siteConfig.qualificationSections.skills" class="mb-8">
-      <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
-        <i class="fas fa-code mr-2"></i>
-        技能专长
-      </h3>
-      <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-4">
-        <div v-for="icon in techIcons" :key="icon.name"
-             class="flex flex-col items-center justify-center bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors group">
-          <component :is="icon.component" class="w-12 h-12 mb-2" />
-          <span class="text-xs text-gray-600 text-center">{{ icon.name }}</span>
-        </div>
-      </div>
-    </div>
+
 
     <!-- 工作经历 -->
     <div v-if="siteConfig.qualificationSections.workExperience" class="mt-8">

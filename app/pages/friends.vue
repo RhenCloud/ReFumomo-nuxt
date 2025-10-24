@@ -215,6 +215,74 @@ function resetForm() {
                 </div>
             </section>
 
+            <!-- 分页导航 -->
+            <section
+                ref="paginationRef"
+                v-if="totalPages > 1"
+                class="bg-white rounded-2xl shadow-lg p-6 max-w-4xl w-full mb-12 component-card"
+                style="box-shadow: 0 4px 24px rgba(139, 90, 140, 0.08)"
+            >
+                <div class="flex justify-center items-center gap-2">
+                    <!-- 上一页按钮 -->
+                    <NuxtLink
+                        v-if="currentPage > 1"
+                        :to="`/friends?page=${currentPage - 1}`"
+                        class="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-200 hover:scale-105 no-underline"
+                    >
+                        <i class="fas fa-chevron-left"></i>
+                        <span>上一页</span>
+                    </NuxtLink>
+                    <span
+                        v-else
+                        class="flex items-center gap-2 bg-gray-50 text-gray-400 px-4 py-2 rounded-lg text-sm font-medium cursor-not-allowed"
+                    >
+                        <i class="fas fa-chevron-left"></i>
+                        <span>上一页</span>
+                    </span>
+
+                    <!-- 页码显示 -->
+                    <div class="flex items-center gap-2 mx-4">
+                        <template v-for="pageNum in totalPages" :key="pageNum">
+                            <span
+                                v-if="pageNum === currentPage"
+                                class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium"
+                            >
+                                {{ pageNum }}
+                            </span>
+                            <NuxtLink
+                                v-else
+                                :to="`/friends?page=${pageNum}`"
+                                class="bg-gray-100 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-200 hover:scale-105 no-underline"
+                            >
+                                {{ pageNum }}
+                            </NuxtLink>
+                        </template>
+                    </div>
+
+                    <!-- 下一页按钮 -->
+                    <NuxtLink
+                        v-if="currentPage < totalPages"
+                        :to="`/friends?page=${currentPage + 1}`"
+                        class="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-200 hover:scale-105 no-underline"
+                    >
+                        <span>下一页</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </NuxtLink>
+                    <span
+                        v-else
+                        class="flex items-center gap-2 bg-gray-50 text-gray-400 px-4 py-2 rounded-lg text-sm font-medium cursor-not-allowed"
+                    >
+                        <span>下一页</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                </div>
+
+                <!-- 分页信息 -->
+                <div class="text-center mt-4 text-gray-500 text-sm">
+                    第 {{ currentPage }} 页，共 {{ totalPages }} 页 · 共 {{ totalItems }} 个网站
+                </div>
+            </section>
+
             <!-- 申请友链按钮 -->
             <section
                 ref="applyButtonRef"
@@ -309,73 +377,6 @@ function resetForm() {
                 </div>
             </Teleport>
 
-            <!-- 分页导航 -->
-            <section
-                ref="paginationRef"
-                v-if="totalPages > 1"
-                class="bg-white rounded-2xl shadow-lg p-6 max-w-4xl w-full mb-12 component-card"
-                style="box-shadow: 0 4px 24px rgba(139, 90, 140, 0.08)"
-            >
-                <div class="flex justify-center items-center gap-2">
-                    <!-- 上一页按钮 -->
-                    <NuxtLink
-                        v-if="currentPage > 1"
-                        :to="`/friends?page=${currentPage - 1}`"
-                        class="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-200 hover:scale-105 no-underline"
-                    >
-                        <i class="fas fa-chevron-left"></i>
-                        <span>上一页</span>
-                    </NuxtLink>
-                    <span
-                        v-else
-                        class="flex items-center gap-2 bg-gray-50 text-gray-400 px-4 py-2 rounded-lg text-sm font-medium cursor-not-allowed"
-                    >
-                        <i class="fas fa-chevron-left"></i>
-                        <span>上一页</span>
-                    </span>
-
-                    <!-- 页码显示 -->
-                    <div class="flex items-center gap-2 mx-4">
-                        <template v-for="pageNum in totalPages" :key="pageNum">
-                            <span
-                                v-if="pageNum === currentPage"
-                                class="bg-primary text-white px-3 py-2 rounded-lg text-sm font-medium"
-                            >
-                                {{ pageNum }}
-                            </span>
-                            <NuxtLink
-                                v-else
-                                :to="`/friends?page=${pageNum}`"
-                                class="bg-gray-100 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-200 hover:scale-105 no-underline"
-                            >
-                                {{ pageNum }}
-                            </NuxtLink>
-                        </template>
-                    </div>
-
-                    <!-- 下一页按钮 -->
-                    <NuxtLink
-                        v-if="currentPage < totalPages"
-                        :to="`/friends?page=${currentPage + 1}`"
-                        class="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-200 hover:scale-105 no-underline"
-                    >
-                        <span>下一页</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </NuxtLink>
-                    <span
-                        v-else
-                        class="flex items-center gap-2 bg-gray-50 text-gray-400 px-4 py-2 rounded-lg text-sm font-medium cursor-not-allowed"
-                    >
-                        <span>下一页</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </span>
-                </div>
-
-                <!-- 分页信息 -->
-                <div class="text-center mt-4 text-gray-500 text-sm">
-                    第 {{ currentPage }} 页，共 {{ totalPages }} 页 · 共 {{ totalItems }} 个网站
-                </div>
-            </section>
 
             <!-- 滚动提示和进度指示器 -->
             <div
