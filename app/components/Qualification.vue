@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { siteConfig } from '../config'
+
+// 从 siteConfig.personal.social.github 中解析 GitHub 用户名
+const githubUrl = siteConfig?.personal?.social?.github || ''
+const githubUsername = githubUrl.replace(/\/$/, '').split('/').pop() || ''
 // 个人履历组件
 interface Education {
   title: string
@@ -159,42 +164,38 @@ const awards: Award[] = [
            style="box-shadow: 0 4px 24px rgba(139,90,140,0.08);">
     <h2 class="text-3xl font-bold text-primary mb-8 text-center font-fumofumo">个人履历</h2>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- 教育背景 -->
-      <div class="space-y-6">
-        <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
-          <i class="fas fa-graduation-cap mr-2"></i>
-          教育背景
-        </h3>
-        <div class="space-y-4">
-          <div v-for="edu in education" :key="edu.title" 
-               class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-4">
-            <div class="flex justify-between items-start mb-2">
-              <h4 class="font-semibold text-gray-800">{{ edu.title }}</h4>
-              <span class="text-sm text-gray-500">{{ edu.period }}</span>
-            </div>
-            <p class="text-gray-600 text-sm">{{ edu.school }}</p>
-            <p class="text-gray-600 text-sm mt-1">{{ edu.courses }}</p>
-          </div>
-        </div>
+    <!-- GitHub 热力图 -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+        <i class="fab fa-github mr-2"></i>
+        GitHub 活动
+      </h3>
+      <div class="flex justify-center">
+        <img
+          v-if="githubUsername"
+          :src="`https://ghchart.rshah.org/${githubUsername}`"
+          :alt="`GitHub contributions for ${githubUsername}`"
+          class="w-full max-w-4xl"
+        />
+        <p v-else class="text-sm text-gray-500">未配置 GitHub 用户名</p>
       </div>
-
-      <!-- 技能专长 -->
-      <div class="space-y-6">
-        <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
-          <i class="fas fa-code mr-2"></i>
-          技能专长
-        </h3>
-        <div class="space-y-3">
-          <div v-for="skill in skills" :key="skill.category"
-               class="flex items-center justify-between bg-gray-50 rounded-lg p-3">
-            <span class="text-gray-700">{{ skill.category }}</span>
-            <div class="flex gap-1">
-              <span v-for="tech in skill.technologies" :key="tech.name"
-                    :class="`px-2 py-1 text-xs rounded ${tech.color}`">
-                {{ tech.name }}
-              </span>
-            </div>
+    </div>
+    
+    <!-- 技能专长 -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+        <i class="fas fa-code mr-2"></i>
+        技能专长
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div v-for="skill in skills" :key="skill.category"
+             class="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+          <span class="text-gray-700">{{ skill.category }}</span>
+          <div class="flex gap-1">
+            <span v-for="tech in skill.technologies" :key="tech.name"
+                  :class="`px-2 py-1 text-xs rounded ${tech.color}`">
+              {{ tech.name }}
+            </span>
           </div>
         </div>
       </div>
@@ -260,6 +261,7 @@ const awards: Award[] = [
         </div>
       </div>
     </div>
+
   </section>
 </template>
 
