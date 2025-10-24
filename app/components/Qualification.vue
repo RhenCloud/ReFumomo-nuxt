@@ -110,9 +110,9 @@ const workExperience: WorkExperience[] = [
 const projects: Project[] = [
   {
     title: '个人主页',
-    description: '基于Astro的静态个人主页，支持RSS订阅博客文章、项目展示',
+    description: '基于Nuxt的静态个人主页，支持RSS订阅博客文章、项目展示',
     technologies: [
-      { name: 'Astro', color: 'bg-blue-100 text-blue-800' },
+      { name: 'Nuxt', color: 'bg-blue-100 text-blue-800' },
       { name: 'Tailwind', color: 'bg-orange-100 text-orange-800' }
     ],
     bgColor: 'bg-gradient-to-br from-blue-50 to-indigo-50',
@@ -162,10 +162,10 @@ const awards: Award[] = [
 <template>
   <section class="bg-white rounded-3xl shadow-lg p-8 w-full mb-12"
            style="box-shadow: 0 4px 24px rgba(139,90,140,0.08);">
-    <h2 class="text-3xl font-bold text-primary mb-8 text-center font-fumofumo">个人履历</h2>
+    <h2 class="text-3xl font-bold text-primary mb-8 text-center font-fumofumo">个人履历（以下功能可以在配置文件中开或关）</h2>
     
     <!-- GitHub 热力图 -->
-    <div class="mb-8">
+    <div v-if="siteConfig.qualificationSections.githubHeatmap" class="mb-8">
       <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
         <i class="fab fa-github mr-2"></i>
         GitHub 活动
@@ -180,9 +180,28 @@ const awards: Award[] = [
         <p v-else class="text-sm text-gray-500">未配置 GitHub 用户名</p>
       </div>
     </div>
-    
+
+    <!-- 教育背景 -->
+    <div v-if="siteConfig.qualificationSections.education" class="mb-8">
+      <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+        <i class="fas fa-code mr-2"></i>
+          教育背景
+        </h3>
+        <div class="space-y-4">
+          <div v-for="edu in education" :key="edu.title" 
+               class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-4">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-semibold text-gray-800">{{ edu.title }}</h4>
+              <span class="text-sm text-gray-500">{{ edu.period }}</span>
+            </div>
+            <p class="text-gray-600 text-sm">{{ edu.school }}</p>
+            <p class="text-gray-600 text-sm mt-1">{{ edu.courses }}</p>
+          </div>
+        </div>
+      </div>
+
     <!-- 技能专长 -->
-    <div class="mb-8">
+    <div v-if="siteConfig.qualificationSections.skills" class="mb-8">
       <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
         <i class="fas fa-code mr-2"></i>
         技能专长
@@ -202,7 +221,7 @@ const awards: Award[] = [
     </div>
 
     <!-- 工作经历 -->
-    <div class="mt-8">
+    <div v-if="siteConfig.qualificationSections.workExperience" class="mt-8">
       <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
         <i class="fas fa-briefcase mr-2"></i>
         工作经历
@@ -226,7 +245,7 @@ const awards: Award[] = [
     </div>
 
     <!-- 项目经历 -->
-    <div class="mt-8">
+    <div v-if="siteConfig.qualificationSections.projects" class="mt-8">
       <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
         <i class="fas fa-rocket mr-2"></i>
         主要项目
@@ -247,7 +266,7 @@ const awards: Award[] = [
     </div>
 
     <!-- 获得荣誉 -->
-    <div class="mt-8">
+    <div v-if="siteConfig.qualificationSections.awards" class="mt-8">
       <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
         <i class="fas fa-trophy mr-2"></i>
         获得荣誉

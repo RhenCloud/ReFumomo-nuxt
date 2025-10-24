@@ -127,6 +127,18 @@ export const siteConfig = {
     },
 
     // ========================================
+    // 个人履历组件显示开关
+    // ========================================
+    qualificationSections: {
+        githubHeatmap: true,      // GitHub 热力图
+        education: true,          // 教育背景
+        skills: true,             // 技能专长
+        workExperience: true,     // 工作经历
+        projects: true,           // 项目经历
+        awards: true,             // 获得荣誉
+    },
+
+    // ========================================
     // 网站UI设置
     // ========================================
 
