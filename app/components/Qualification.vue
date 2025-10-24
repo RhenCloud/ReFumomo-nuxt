@@ -4,6 +4,20 @@ import { siteConfig } from '../config'
 // 从 siteConfig.personal.social.github 中解析 GitHub 用户名
 const githubUrl = siteConfig?.personal?.social?.github || ''
 const githubUsername = githubUrl.replace(/\/$/, '').split('/').pop() || ''
+
+const iconModules = import.meta.glob('./icones/*.vue', { eager: true }) as Record<string, any>
+
+// 处理组件信息，从文件名提取显示名称和组件实例
+const techIcons = Object.entries(iconModules).map(([path, module]) => {
+  const fileName = path.split('/').pop()?.replace('.vue', '') || ''
+  // 从组件名称中提取显示名称（去掉 Logos 前缀）
+  const displayName = fileName.replace(/^Logos/, '').replace(/Icon$/, '')
+  return {
+    name: displayName,
+    component: module.default || module
+  }
+})
+
 // 个人履历组件
 interface Education {
   title: string
@@ -206,16 +220,11 @@ const awards: Award[] = [
         <i class="fas fa-code mr-2"></i>
         技能专长
       </h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div v-for="skill in skills" :key="skill.category"
-             class="flex items-center justify-between bg-gray-50 rounded-lg p-3">
-          <span class="text-gray-700">{{ skill.category }}</span>
-          <div class="flex gap-1">
-            <span v-for="tech in skill.technologies" :key="tech.name"
-                  :class="`px-2 py-1 text-xs rounded ${tech.color}`">
-              {{ tech.name }}
-            </span>
-          </div>
+      <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        <div v-for="icon in techIcons" :key="icon.name"
+             class="flex flex-col items-center justify-center bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors group">
+          <component :is="icon.component" class="w-12 h-12 mb-2" />
+          <span class="text-xs text-gray-600 text-center">{{ icon.name }}</span>
         </div>
       </div>
     </div>
