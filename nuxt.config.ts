@@ -15,6 +15,9 @@ export default defineNuxtConfig({
 
   // 运行时配置
   runtimeConfig: {
+    // 服务端私有配置
+    rssUrl: process.env.RSS_URL || 'https://blog.sakura.ink/rss.xml',
+    
     // 公开的运行时配置
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://haku.sakura.ink'
