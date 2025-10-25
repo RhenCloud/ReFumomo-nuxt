@@ -101,6 +101,13 @@ export const siteConfig = {
         website: {
             title: "我的网站",
             description: "正在运行的网站信息",
+            // 网站状态监测配置
+            statusCheck: {
+                enable: true,              // 是否开启状态监测
+                autoRefreshInterval: 300000, // 自动刷新间隔（毫秒），默认5分钟
+                timeout: 10000,            // 检测超时时间（毫秒），默认10秒
+                showResponseTime: false,    // 是否显示响应时间
+            },
         },
     },
 
