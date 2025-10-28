@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear()
       <p class="text-sm mt-1 text-muted">
         Powered by 
         <a href="https://nuxt.com" target="_blank" rel="noopener noreferrer" class="hover:underline transition-all duration-300 text-primary">Nuxt</a> &
-        <a href="https://github.com/Hakutyan-bai/fumofumo" target="_blank" rel="noopener noreferrer" class="hover:underline transition-all duration-300 text-primary">Fumomo</a>
+        <a href="https://github.com/Hakutyan-bai/fumomo-nuxt" target="_blank" rel="noopener noreferrer" class="hover:underline transition-all duration-300 text-primary">Fumomo</a>
       </p>
     </div>
   </footer>
